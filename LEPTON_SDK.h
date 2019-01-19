@@ -98,22 +98,19 @@ extern "C"
 /******************************************************************************/
 /** EXPORTED TYPEDEFS                                                        **/
 /******************************************************************************/
-   typedef struct LEP_SDK_VERSION_TAG
-   {
-      LEP_UINT8   major;
-      LEP_UINT8   minor;
-      LEP_UINT8   build;
-      LEP_UINT8   reserved;
+    typedef struct LEP_SDK_VERSION_TAG {
+        LEP_UINT8   major;
+        LEP_UINT8   minor;
+        LEP_UINT8   build;
+        LEP_UINT8   reserved;
+    } LEP_SDK_VERSION_T, *LEP_SDK_VERSION_T_PTR;
 
-   }LEP_SDK_VERSION_T, *LEP_SDK_VERSION_T_PTR;
+    typedef enum LEP_SDK_BOOT_STATUS_E_TAG {
+        LEP_BOOT_STATUS_NOT_BOOTED = 0,
+        LEP_BOOT_STATUS_BOOTED = 1,
 
-   typedef enum LEP_SDK_BOOT_STATUS_E_TAG
-   {
-      LEP_BOOT_STATUS_NOT_BOOTED = 0,
-      LEP_BOOT_STATUS_BOOTED = 1,
-
-      LEP_END_BOOT_STATUS,
-   }LEP_SDK_BOOT_STATUS_E, *LEP_SDK_BOOT_STATUS_E_PTR;
+        LEP_END_BOOT_STATUS,
+    } LEP_SDK_BOOT_STATUS_E, *LEP_SDK_BOOT_STATUS_E_PTR;
 /******************************************************************************/
 /** EXPORTED DEFINES                                                         **/ 
 /******************************************************************************/
@@ -121,7 +118,7 @@ extern "C"
 /******************************************************************************/
 /** EXPORTED PUBLIC DATA                                                     **/
 /******************************************************************************/
-   extern LEP_SDK_VERSION_T sdkVersion;
+    extern LEP_SDK_VERSION_T sdkVersion;
 /******************************************************************************/
 /** EXPORTED PUBLIC FUNCTIONS                                                **/
 /******************************************************************************/
