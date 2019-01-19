@@ -49,10 +49,10 @@
 #include "LEPTON_Types.h"
 #include "LEPTON_ErrorCodes.h"
 #include "LEPTON_Macros.h"
-#include "raspi_I2C.h"
 #include "LEPTON_I2C_Reg.h"
+#include "raspi_I2C.h"
 #include <stdlib.h>
-
+#include <unistd.h>
 #include <fcntl.h>
 #include <linux/i2c-dev.h>
 #include <errno.h>
