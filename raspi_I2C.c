@@ -109,9 +109,11 @@ LEP_RESULT DEV_I2C_MasterInit(LEP_UINT16 portID,
                               LEP_UINT16 *BaudRate)
 {
     LEP_RESULT result = LEP_OK;
-    int raspi_result;
-    LEP_UINT16 numFreeDevices[5];
-    LEP_UINT8 testwrite[12];
+
+    // NOTE: apparently unused
+    // int raspi_result;
+    // LEP_UINT16 numFreeDevices[5];
+    // LEP_UINT8 testwrite[12];
 
     /* Place Device-Specific Interface here
     */
@@ -158,9 +160,9 @@ LEP_RESULT DEV_I2C_MasterClose()
 {
     LEP_RESULT result = LEP_OK;
 
-    /* Place Device-Specific Interface here
-    */ 
-    LEP_UINT32 handle = 1;
+    /* Place Device-Specific Interface here */ 
+    // TODO
+    // LEP_UINT32 handle = 1;
     //int return_value = ISLDLL_close(handle);
 
     return(result);
@@ -200,7 +202,8 @@ LEP_RESULT DEV_I2C_MasterReadData(LEP_UINT16  portID,               // User-defi
     int raspi_result;
     LEP_UINT16 bytesToWrite = ADDRESS_SIZE_BYTES;
     LEP_UINT16 bytesToRead = wordsToRead << 1;
-    LEP_UINT16 bytesActuallyWritten = 0;
+    // NOTE: unused
+    // LEP_UINT16 bytesActuallyWritten = 0;
     LEP_UINT16 bytesActuallyRead = 0;
     LEP_UINT16 wordsActuallyRead = 0;
     LEP_UINT8* txdata = (LEP_UINT8*)malloc(sizeof(LEP_UINT8)*ADDRESS_SIZE_BYTES);
@@ -253,7 +256,8 @@ LEP_RESULT DEV_I2C_MasterReadData(LEP_UINT16  portID,               // User-defi
     free(txdata);
     free(rxdata);
 
-    LEP_UINT8* byteData = (LEP_UINT8*)readDataPtr;
+    // NOTE: unused
+    // LEP_UINT8* byteData = (LEP_UINT8*)readDataPtr;
 
     if (raspi_result != 0 || bytesActuallyRead != bytesToRead) {
         result = LEP_ERROR_I2C_FAIL;

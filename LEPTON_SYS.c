@@ -173,15 +173,15 @@ LEP_RESULT LEP_GetSysCustSerialNumber(LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
    LEP_UINT16 attributeWordLength = 16;      /*32 byte string */
 
    if(sysCustSNPtr == NULL)
-   {
       return(LEP_BAD_ARG_POINTER_ERROR);
-   }
 
    result = LEP_GetAttribute(portDescPtr,
                              (LEP_COMMAND_ID)LEP_CID_SYS_CUST_SERIAL_NUMBER,
                              (LEP_ATTRIBUTE_T_PTR)sysCustSNPtr,
                              attributeWordLength);
+   return result;
 }
+
 #endif
 LEP_RESULT LEP_GetSysCameraUpTime( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
                                    LEP_SYS_UPTIME_NUMBER_T_PTR sysCameraUpTimePtr )

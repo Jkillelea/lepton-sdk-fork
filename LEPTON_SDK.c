@@ -90,7 +90,8 @@
 /******************************************************************************/
 /** PRIVATE FUNCTION DECLARATIONS                                            **/
 /******************************************************************************/
-static LEP_RESULT _LEP_DelayCounts(LEP_UINT32 counts);
+// NOTE apparenty unused
+// static LEP_RESULT _LEP_DelayCounts(LEP_UINT32 counts);
 
 /******************************************************************************/
 /** EXPORTED PUBLIC DATA                                                     **/
@@ -260,7 +261,7 @@ LEP_RESULT LEP_OpenPort(LEP_UINT16 portID,
                         LEP_UINT16   portBaudRate,
                         LEP_CAMERA_PORT_DESC_T_PTR portDescPtr)
 {
-    LEP_RESULT result;
+    LEP_RESULT result = LEP_OK;
     LEP_UINT8 deviceAddress;
 
     /* Attempt to acquire memory
@@ -318,32 +319,24 @@ LEP_RESULT LEP_OpenPort(LEP_UINT16 portID,
 
 LEP_RESULT LEP_ClosePort(LEP_CAMERA_PORT_DESC_T_PTR portDescPtr)
 {
-    LEP_RESULT result;
+    LEP_RESULT result = LEP_OK;
 	
-    /* Validate the port descriptor
-    */ 
-    if( portDescPtr == NULL )
-    {
+    /* Validate the port descriptor */ 
+    if (portDescPtr == NULL) {
         return(LEP_COMM_PORT_NOT_OPEN);
     }
 
-    /* Close Port driver
-    */
-    if( portDescPtr->portType == LEP_CCI_TWI )
-    {
+    /* Close Port driver */
+    if (portDescPtr->portType == LEP_CCI_TWI) {
         result = LEP_I2C_ClosePort(portDescPtr);
-    }
-    else if( portDescPtr->portType == LEP_CCI_SPI )
-    {
-
-    }
-    else
+    } else if (portDescPtr->portType == LEP_CCI_SPI) {
+        // TODO apparently
+    } else {
         result = LEP_COMM_INVALID_PORT_ERROR;
-
-    
+    }
 
 #ifdef LEP_USE_DYNAMIC_ALLOCATION
-    free( portDescPtr );
+    free(portDescPtr);
 #endif        
 
     return(result);
@@ -379,8 +372,9 @@ LEP_RESULT LEP_ResetPort(LEP_CAMERA_PORT_DESC_T_PTR portDescPtr)
 LEP_RESULT LEP_GetPortStatus(LEP_CAMERA_PORT_DESC_T_PTR portDescPtr, 
                              LEP_UINT16 *status)
 {
-    LEP_RESULT result;
+    LEP_RESULT result = LEP_OK;
 
+    // TODO
 
     return(result);
 }
@@ -460,33 +454,27 @@ LEP_RESULT LEP_DirectWriteBuffer(LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
                                  LEP_ATTRIBUTE_T_PTR attributePtr,
                                  LEP_UINT16 attributeWordLength)
 {
-   LEP_RESULT result;
-   /* Validate the port descriptor
-   */ 
-   if( portDescPtr == NULL )
-   {
-     return(LEP_COMM_PORT_NOT_OPEN);
-   }
+    LEP_RESULT result = LEP_OK;
+    /* Validate the port descriptor */ 
+    if (portDescPtr == NULL) {
+        return(LEP_COMM_PORT_NOT_OPEN);
+    }
 
-   /* Issue Command to the Active Port
-   */
-   if( portDescPtr->portType == LEP_CCI_TWI )
-   {
-     /* Use the Lepton TWI/CCI Port
-     */ 
-     result = LEP_I2C_DirectWriteBuffer(portDescPtr,
+    /* Issue Command to the Active Port */
+    if (portDescPtr->portType == LEP_CCI_TWI)
+    {
+        /* Use the Lepton TWI/CCI Port */ 
+        result = LEP_I2C_DirectWriteBuffer(portDescPtr,
                                         attributePtr,
                                         attributeWordLength );
-   }
-   else if( portDescPtr->portType == LEP_CCI_SPI )
-   {
-     /* Use the Lepton SPI Port
-     */ 
+    } else if(portDescPtr->portType == LEP_CCI_SPI) {
+        /* Use the Lepton SPI Port */ 
+        // TODO I guess
+    } else {
+        result = LEP_COMM_INVALID_PORT_ERROR;
+    }
 
-   }
-   else
-     result = LEP_COMM_INVALID_PORT_ERROR;
-   return(result);
+    return(result);
 }
 
 LEP_RESULT LEP_GetSDKVersion(LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
@@ -494,10 +482,10 @@ LEP_RESULT LEP_GetSDKVersion(LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
 {
    LEP_RESULT result = LEP_OK;
 
-   if(sdkVersionPtr == NULL)
-   {
+   if(sdkVersionPtr == NULL) {
       return(LEP_BAD_ARG_POINTER_ERROR);
    }
+
    sdkVersionPtr->major = LEP_SDK_VERSION_MAJOR;
    sdkVersionPtr->minor = LEP_SDK_VERSION_MINOR;
    sdkVersionPtr->build = LEP_SDK_VERSION_BUILD;
@@ -529,18 +517,19 @@ LEP_RESULT LEP_GetCameraBootStatus(LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
 /** PRIVATE MODULE FUNCTIONS                                                 **/
 /******************************************************************************/
 
-LEP_RESULT _LEP_DelayCounts(LEP_UINT32 counts)
-{
-    LEP_UINT32 a;
-    while( counts-- )
-    {
-        a=counts;        
-    }
-    if( a )
-    {
-        return(LEP_TIMEOUT_ERROR) ;
-    }
-    return(LEP_OK);
-}
-
+// NOTE: apparently unused
+// LEP_RESULT _LEP_DelayCounts(LEP_UINT32 counts)
+// {
+//     LEP_UINT32 a;
+//     while( counts-- )
+//     {
+//         a=counts;        
+//     }
+//     if( a )
+//     {
+//         return(LEP_TIMEOUT_ERROR) ;
+//     }
+//     return(LEP_OK);
+// }
+// 
 
