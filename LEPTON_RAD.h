@@ -60,138 +60,129 @@
 **
 *******************************************************************************/
 #ifndef _LEPTON_RAD_H_
-   #define _LEPTON_RAD_H_
-   #ifdef __cplusplus
-extern "C"
-{
-   #endif
+#define _LEPTON_RAD_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /******************************************************************************/
 /** INCLUDE FILES                                                            **/
 /******************************************************************************/
 
-   #include "LEPTON_Types.h"
-   #include "LEPTON_ErrorCodes.h"
+#include "LEPTON_Types.h"
+#include "LEPTON_ErrorCodes.h"
 
 /******************************************************************************/
 /** EXPORTED DEFINES                                                         **/
 /******************************************************************************/
 
-   #define LEP_RAD_TEMPERATURE_SCALE_FACTOR         100         // All temperatures in degrees C are scaled by 100 1.20 is 120
-//
-   #define LEP_RAD_RBFO_SCALE_SHIFT                 13          // 2^13 = 8192
+#define LEP_RAD_TEMPERATURE_SCALE_FACTOR         100 // All temperatures in degrees C are scaled by 100 1.20 is 120
 
-   #define LEP_RAD_LUT128_ENTRIES                   128
-   #define LEP_RAD_LUT256_ENTRIES                   256
+#define LEP_RAD_RBFO_SCALE_SHIFT                 13 // 2^13 = 8192
 
+#define LEP_RAD_LUT128_ENTRIES                   128
+#define LEP_RAD_LUT256_ENTRIES                   256
 
-   #define LEP_RAD_MODULE_BASE                     0x4E00   // includes the OEM Bit set 0x4000
+#define LEP_RAD_MODULE_BASE                     0x4E00   // includes the OEM Bit set 0x4000
 
-   #define LEP_CID_RAD_RBFO_INTERNAL               (LEP_RAD_MODULE_BASE + 0x0000 )  /* High Gain */
-   #define LEP_CID_RAD_RBFO_EXTERNAL               (LEP_RAD_MODULE_BASE + 0x0004 )  /* High Gain */
-   #define LEP_CID_RAD_DEBUG_TEMP                  (LEP_RAD_MODULE_BASE + 0x0008 )
-   #define LEP_CID_RAD_DEBUG_FLUX                  (LEP_RAD_MODULE_BASE + 0x000C )
-   #define LEP_CID_RAD_ENABLE_STATE                (LEP_RAD_MODULE_BASE + 0x0010 )
-   #define LEP_CID_RAD_GLOBAL_OFFSET               (LEP_RAD_MODULE_BASE + 0x0014 )
-   #define LEP_CID_RAD_TFPA_CTS_MODE               (LEP_RAD_MODULE_BASE + 0x0018 )
-   #define LEP_CID_RAD_TFPA_CTS                    (LEP_RAD_MODULE_BASE + 0x001C )
-   #define LEP_CID_RAD_TEQ_SHUTTER_LUT             (LEP_RAD_MODULE_BASE + 0x0020 )
-   #define LEP_CID_RAD_TSHUTTER_MODE               (LEP_RAD_MODULE_BASE + 0x0024 )
-   #define LEP_CID_RAD_TSHUTTER                    (LEP_RAD_MODULE_BASE + 0x0028 )
-   #define LEP_CID_RAD_RUN_FFC                     (LEP_RAD_MODULE_BASE + 0x002C )
-   #define LEP_CID_RAD_RUN_STATUS                  (LEP_RAD_MODULE_BASE + 0x0030 )
-   #define LEP_CID_RAD_RESPONSIVITY_SHIFT          (LEP_RAD_MODULE_BASE + 0x0034 )
-   #define LEP_CID_RAD_F_NUMBER                    (LEP_RAD_MODULE_BASE + 0x0038 )
-   #define LEP_CID_RAD_TAU_LENS                    (LEP_RAD_MODULE_BASE + 0x003C )
-   #define LEP_CID_RAD_RESPONSIVITY_VALUE_LUT      (LEP_RAD_MODULE_BASE + 0x0040 )
-   #define LEP_CID_RAD_GLOBAL_GAIN                 (LEP_RAD_MODULE_BASE + 0x0044 )
-   #define LEP_CID_RAD_RADIOMETRY_FILTER           (LEP_RAD_MODULE_BASE + 0x0048 )
-   #define LEP_CID_RAD_TFPA_LUT                    (LEP_RAD_MODULE_BASE + 0x004C )
-   #define LEP_CID_RAD_TAUX_LUT                    (LEP_RAD_MODULE_BASE + 0x0050 )
-   #define LEP_CID_RAD_TAUX_CTS_MODE               (LEP_RAD_MODULE_BASE + 0x0054 )
-   #define LEP_CID_RAD_TAUX_CTS                    (LEP_RAD_MODULE_BASE + 0x0058 )
-   #define LEP_CID_RAD_TEQ_SHUTTER_FLUX            (LEP_RAD_MODULE_BASE + 0x005C )
-   #define LEP_CID_RAD_MFFC_FLUX                   (LEP_RAD_MODULE_BASE + 0x0060 )
-   #define LEP_CID_RAD_FRAME_MEDIAN_VALUE          (LEP_RAD_MODULE_BASE + 0x007C )
-   #define LEP_CID_RAD_MLG_LUT                     (LEP_RAD_MODULE_BASE + 0x0088 )
-   #define LEP_CID_RAD_THOUSING_TCP                (LEP_RAD_MODULE_BASE + 0x008C )
-   #define LEP_CID_RAD_HOUSING_TCP                 (LEP_RAD_MODULE_BASE + 0x008C )
-   #define LEP_CID_RAD_SHUTTER_TCP                 (LEP_RAD_MODULE_BASE + 0x0090 )
-   #define LEP_CID_RAD_LENS_TCP                    (LEP_RAD_MODULE_BASE + 0x0094 )
-   #define LEP_CID_RAD_PREVIOUS_GLOBAL_OFFSET      (LEP_RAD_MODULE_BASE + 0x0098 )
-   #define LEP_CID_RAD_PREVIOUS_GLOBAL_GAIN        (LEP_RAD_MODULE_BASE + 0x009C )
-   #define LEP_CID_RAD_GLOBAL_GAIN_FFC             (LEP_RAD_MODULE_BASE + 0x00A0 )
-   #define LEP_CID_RAD_CNF_SCALE_FACTOR            (LEP_RAD_MODULE_BASE + 0x00A4 )
-   #define LEP_CID_RAD_TNF_SCALE_FACTOR            (LEP_RAD_MODULE_BASE + 0x00A8 )
-   #define LEP_CID_RAD_SNF_SCALE_FACTOR            (LEP_RAD_MODULE_BASE + 0x00AC )
-   #define LEP_CID_RAD_ARBITRARY_OFFSET            (LEP_RAD_MODULE_BASE + 0x00B8 )
+#define LEP_CID_RAD_RBFO_INTERNAL               (LEP_RAD_MODULE_BASE + 0x0000 )  /* High Gain */
+#define LEP_CID_RAD_RBFO_EXTERNAL               (LEP_RAD_MODULE_BASE + 0x0004 )  /* High Gain */
+#define LEP_CID_RAD_DEBUG_TEMP                  (LEP_RAD_MODULE_BASE + 0x0008 )
+#define LEP_CID_RAD_DEBUG_FLUX                  (LEP_RAD_MODULE_BASE + 0x000C )
+#define LEP_CID_RAD_ENABLE_STATE                (LEP_RAD_MODULE_BASE + 0x0010 )
+#define LEP_CID_RAD_GLOBAL_OFFSET               (LEP_RAD_MODULE_BASE + 0x0014 )
+#define LEP_CID_RAD_TFPA_CTS_MODE               (LEP_RAD_MODULE_BASE + 0x0018 )
+#define LEP_CID_RAD_TFPA_CTS                    (LEP_RAD_MODULE_BASE + 0x001C )
+#define LEP_CID_RAD_TEQ_SHUTTER_LUT             (LEP_RAD_MODULE_BASE + 0x0020 )
+#define LEP_CID_RAD_TSHUTTER_MODE               (LEP_RAD_MODULE_BASE + 0x0024 )
+#define LEP_CID_RAD_TSHUTTER                    (LEP_RAD_MODULE_BASE + 0x0028 )
+#define LEP_CID_RAD_RUN_FFC                     (LEP_RAD_MODULE_BASE + 0x002C )
+#define LEP_CID_RAD_RUN_STATUS                  (LEP_RAD_MODULE_BASE + 0x0030 )
+#define LEP_CID_RAD_RESPONSIVITY_SHIFT          (LEP_RAD_MODULE_BASE + 0x0034 )
+#define LEP_CID_RAD_F_NUMBER                    (LEP_RAD_MODULE_BASE + 0x0038 )
+#define LEP_CID_RAD_TAU_LENS                    (LEP_RAD_MODULE_BASE + 0x003C )
+#define LEP_CID_RAD_RESPONSIVITY_VALUE_LUT      (LEP_RAD_MODULE_BASE + 0x0040 )
+#define LEP_CID_RAD_GLOBAL_GAIN                 (LEP_RAD_MODULE_BASE + 0x0044 )
+#define LEP_CID_RAD_RADIOMETRY_FILTER           (LEP_RAD_MODULE_BASE + 0x0048 )
+#define LEP_CID_RAD_TFPA_LUT                    (LEP_RAD_MODULE_BASE + 0x004C )
+#define LEP_CID_RAD_TAUX_LUT                    (LEP_RAD_MODULE_BASE + 0x0050 )
+#define LEP_CID_RAD_TAUX_CTS_MODE               (LEP_RAD_MODULE_BASE + 0x0054 )
+#define LEP_CID_RAD_TAUX_CTS                    (LEP_RAD_MODULE_BASE + 0x0058 )
+#define LEP_CID_RAD_TEQ_SHUTTER_FLUX            (LEP_RAD_MODULE_BASE + 0x005C )
+#define LEP_CID_RAD_MFFC_FLUX                   (LEP_RAD_MODULE_BASE + 0x0060 )
+#define LEP_CID_RAD_FRAME_MEDIAN_VALUE          (LEP_RAD_MODULE_BASE + 0x007C )
+#define LEP_CID_RAD_MLG_LUT                     (LEP_RAD_MODULE_BASE + 0x0088 )
+#define LEP_CID_RAD_THOUSING_TCP                (LEP_RAD_MODULE_BASE + 0x008C )
+#define LEP_CID_RAD_HOUSING_TCP                 (LEP_RAD_MODULE_BASE + 0x008C )
+#define LEP_CID_RAD_SHUTTER_TCP                 (LEP_RAD_MODULE_BASE + 0x0090 )
+#define LEP_CID_RAD_LENS_TCP                    (LEP_RAD_MODULE_BASE + 0x0094 )
+#define LEP_CID_RAD_PREVIOUS_GLOBAL_OFFSET      (LEP_RAD_MODULE_BASE + 0x0098 )
+#define LEP_CID_RAD_PREVIOUS_GLOBAL_GAIN        (LEP_RAD_MODULE_BASE + 0x009C )
+#define LEP_CID_RAD_GLOBAL_GAIN_FFC             (LEP_RAD_MODULE_BASE + 0x00A0 )
+#define LEP_CID_RAD_CNF_SCALE_FACTOR            (LEP_RAD_MODULE_BASE + 0x00A4 )
+#define LEP_CID_RAD_TNF_SCALE_FACTOR            (LEP_RAD_MODULE_BASE + 0x00A8 )
+#define LEP_CID_RAD_SNF_SCALE_FACTOR            (LEP_RAD_MODULE_BASE + 0x00AC )
+#define LEP_CID_RAD_ARBITRARY_OFFSET            (LEP_RAD_MODULE_BASE + 0x00B8 )
 
-   #define LEP_CID_RAD_FLUX_LINEAR_PARAMS          (LEP_RAD_MODULE_BASE + 0x00BC)
-   #define LEP_CID_RAD_TLINEAR_ENABLE_STATE        (LEP_RAD_MODULE_BASE + 0x00C0)
-   #define LEP_CID_RAD_TLINEAR_RESOLUTION          (LEP_RAD_MODULE_BASE + 0x00C4)
-   #define LEP_CID_RAD_TLINEAR_AUTO_RESOLUTION     (LEP_RAD_MODULE_BASE + 0x00C8)
-   #define LEP_CID_RAD_SPOTMETER_ROI               (LEP_RAD_MODULE_BASE + 0x00CC)
-   #define LEP_CID_RAD_SPOTMETER_OBJ_KELVIN        (LEP_RAD_MODULE_BASE + 0x00D0)
+#define LEP_CID_RAD_FLUX_LINEAR_PARAMS          (LEP_RAD_MODULE_BASE + 0x00BC)
+#define LEP_CID_RAD_TLINEAR_ENABLE_STATE        (LEP_RAD_MODULE_BASE + 0x00C0)
+#define LEP_CID_RAD_TLINEAR_RESOLUTION          (LEP_RAD_MODULE_BASE + 0x00C4)
+#define LEP_CID_RAD_TLINEAR_AUTO_RESOLUTION     (LEP_RAD_MODULE_BASE + 0x00C8)
+#define LEP_CID_RAD_SPOTMETER_ROI               (LEP_RAD_MODULE_BASE + 0x00CC)
+#define LEP_CID_RAD_SPOTMETER_OBJ_KELVIN        (LEP_RAD_MODULE_BASE + 0x00D0)
 
-   #define LEP_CID_RAD_RBFO_INTERNAL_LG            (LEP_RAD_MODULE_BASE + 0x00D4 )  /* Low Gain */
-   #define LEP_CID_RAD_RBFO_EXTERNAL_LG            (LEP_RAD_MODULE_BASE + 0x00D8 )  /* Low Gain */
+#define LEP_CID_RAD_RBFO_INTERNAL_LG            (LEP_RAD_MODULE_BASE + 0x00D4 )  /* Low Gain */
+#define LEP_CID_RAD_RBFO_EXTERNAL_LG            (LEP_RAD_MODULE_BASE + 0x00D8 )  /* Low Gain */
 
-   #define LEP_CID_RAD_ARBITRARY_OFFSET_MODE       (LEP_RAD_MODULE_BASE + 0x00DC)
-   #define LEP_CID_RAD_ARBITRARY_OFFSET_PARAMS     (LEP_RAD_MODULE_BASE + 0x00E0)
+#define LEP_CID_RAD_ARBITRARY_OFFSET_MODE       (LEP_RAD_MODULE_BASE + 0x00DC)
+#define LEP_CID_RAD_ARBITRARY_OFFSET_PARAMS     (LEP_RAD_MODULE_BASE + 0x00E0)
 
-   #define LEP_CID_RAD_RADIO_CAL_VALUES            (LEP_RAD_MODULE_BASE + 0x00E4)
+#define LEP_CID_RAD_RADIO_CAL_VALUES            (LEP_RAD_MODULE_BASE + 0x00E4)
 
 /******************************************************************************/
 /** EXPORTED TYPE DEFINITIONS                                                **/
 /******************************************************************************/
 
-typedef LEP_UINT16   LEP_RAD_RS_T, *LEP_RAD_RS_T_PTR;
-typedef LEP_UINT16   LEP_RAD_FNUMBER_T, *LEP_RAD_FNUMBER_T_PTR;
-typedef LEP_UINT16   LEP_RAD_TAULENS_T, *LEP_RAD_TAULENS_T_PTR;
+typedef LEP_UINT16 LEP_RAD_RS_T,      *LEP_RAD_RS_T_PTR;
+typedef LEP_UINT16 LEP_RAD_FNUMBER_T, *LEP_RAD_FNUMBER_T_PTR;
+typedef LEP_UINT16 LEP_RAD_TAULENS_T, *LEP_RAD_TAULENS_T_PTR;
 
-typedef LEP_UINT16   LEP_RAD_FNUM_SHUTTER_T, *LEP_RAD_FNUM_SHUTTER_T_PTR;
-typedef LEP_UINT16   LEP_RAD_RADIOMETRY_FILTER_T, *LEP_RAD_RADIOMETRY_FILTER_T_PTR;
-typedef LEP_UINT16   LEP_RAD_MEDIAN_VALUE_T, *LEP_RAD_MEDIAN_VALUE_T_PTR;
-typedef LEP_UINT16   LEP_RAD_PARAMETER_SCALE_FACTOR_T, *LEP_RAD_PARAMETER_SCALE_FACTOR_T_PTR;
-typedef LEP_INT16    LEP_RAD_ARBITRARY_OFFSET_T, *LEP_RAD_ARBITRARY_OFFSET_T_PTR;
-typedef LEP_UINT16   LEP_RAD_SPOTMETER_KELVIN_T, *LEP_RAD_SPOTMETER_KELVIN_T_PTR;
+typedef LEP_UINT16 LEP_RAD_FNUM_SHUTTER_T,           *LEP_RAD_FNUM_SHUTTER_T_PTR;
+typedef LEP_UINT16 LEP_RAD_RADIOMETRY_FILTER_T,      *LEP_RAD_RADIOMETRY_FILTER_T_PTR;
+typedef LEP_UINT16 LEP_RAD_MEDIAN_VALUE_T,           *LEP_RAD_MEDIAN_VALUE_T_PTR;
+typedef LEP_UINT16 LEP_RAD_PARAMETER_SCALE_FACTOR_T, *LEP_RAD_PARAMETER_SCALE_FACTOR_T_PTR;
+typedef LEP_INT16  LEP_RAD_ARBITRARY_OFFSET_T,       *LEP_RAD_ARBITRARY_OFFSET_T_PTR;
+typedef LEP_UINT16 LEP_RAD_SPOTMETER_KELVIN_T,       *LEP_RAD_SPOTMETER_KELVIN_T_PTR;
 
 
-/* TFpa and TAux counts
-*/
+/* TFpa and TAux counts */
 typedef LEP_UINT16  LEP_RAD_TEMPERATURE_COUNTS_T, *LEP_RAD_TEMPERATURE_COUNTS_T_PTR;
 
 /* Standard temperature type for temperatures in degrees C
-*  These are scaled by 100 so: 100xDegC as [s15.0]
-*/
+*  These are scaled by 100 so: 100xDegC as [s15.0] */
 typedef LEP_UINT16  LEP_RAD_KELVIN_T, *LEP_RAD_KELVIN_T_PTR;
 
-/* Flux format: s32 1000x
-*/
+/* Flux format: s32 1000x */
 typedef LEP_INT32   LEP_RAD_FLUX_T, *LEP_RAD_FLUX_T_PTR;
 
-/* Global Gain  [3.13]
-*/
+/* Global Gain  [3.13] */
 typedef LEP_UINT16  LEP_RAD_GLOBAL_GAIN_T, *LEP_RAD_GLOBAL_GAIN_T_PTR;
 
 
-/* Global Offset  [14.0]
-*/
+/* Global Offset  [14.0] */
 typedef LEP_UINT16  LEP_RAD_GLOBAL_OFFSET_T, *LEP_RAD_GLOBAL_OFFSET_T_PTR;
 
-/* LUTs
-*/
+/* LUTs */
 typedef LEP_INT16   LEP_RAD_SIGNED_LUT128_T, *LEP_RAD_SIGNED_LUT128_T_PTR;
 typedef LEP_UINT16  LEP_RAD_LUT128_T, *LEP_RAD_LUT128_T_PTR;
 typedef LEP_UINT16  LEP_RAD_LUT256_T, *LEP_RAD_LUT256_T_PTR;
 
-/* Alpha and Beta
-*/
+/* Alpha and Beta */
 typedef LEP_INT16   LEP_RAD_ALPHA_T, *LEP_RAD_ALPHA_T_PTR;
 typedef LEP_INT16   LEP_RAD_BETA_T, *LEP_RAD_BETA_T_PTR;
 
-/* TShutter Mode
-*/
+/* TShutter Mode */
 typedef enum LEP_RAD_TS_MODE_E_TAG
 {
    LEP_RAD_TS_USER_MODE = 0,
@@ -201,8 +192,7 @@ typedef enum LEP_RAD_TS_MODE_E_TAG
 
 }LEP_RAD_TS_MODE_E, *LEP_RAD_TS_MODE_E_PTR;
 
-/* RBFO
-*/
+/* RBFO */
 typedef struct LEP_RBFO_T_TAG
 {
    LEP_UINT32 RBFO_R;   // value is not scaled
@@ -212,8 +202,7 @@ typedef struct LEP_RBFO_T_TAG
 
 }LEP_RBFO_T, *LEP_RBFO_T_PTR;
 
-/* Linear Temperature correction parameters
-*/
+/* Linear Temperature correction parameters */
 typedef struct LEP_RAD_LINEAR_TEMP_CORRECTION_T_TAG
 {
    LEP_INT16   offset;     // [s8.7]
@@ -224,8 +213,7 @@ typedef struct LEP_RAD_LINEAR_TEMP_CORRECTION_T_TAG
 }LEP_RAD_LINEAR_TEMP_CORRECTION_T, *LEP_RAD_LINEAR_TEMP_CORRECTION_T_PTR;
 
 
-/* Radiometry Enable state
-*/
+/* Radiometry Enable state */
 typedef enum LEP_RAD_ENABLE_E_TAG
 {
    LEP_RAD_DISABLE = 0,
@@ -234,8 +222,7 @@ typedef enum LEP_RAD_ENABLE_E_TAG
 
 }LEP_RAD_ENABLE_E, *LEP_RAD_ENABLE_E_PTR;
 
-/* Temperature TFpa and TAux counts Update Mode
-*/
+/* Temperature TFpa and TAux counts Update Mode */
 typedef enum LEP_RAD_TEMPERATURE_UPDATE_E_TAG
 {
    LEP_RAD_NORMAL_UPDATE = 0,
@@ -244,8 +231,7 @@ typedef enum LEP_RAD_TEMPERATURE_UPDATE_E_TAG
 
 }LEP_RAD_TEMPERATURE_UPDATE_E, *LEP_RAD_TEMPERATURE_UPDATE_E_PTR;
 
-/* Run operation status
-*/
+/* Run operation status */
 typedef enum
 {
    LEP_RAD_STATUS_ERROR = -1,
@@ -495,17 +481,17 @@ extern LEP_RESULT LEP_GetRadMLGLut( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
 extern LEP_RESULT LEP_SetRadMLGLut( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
                                     LEP_RAD_SIGNED_LUT128_T_PTR radMLGLutPtr );
 
-   #if USE_DEPRECATED_HOUSING_TCP_INTERFACE
+#if USE_DEPRECATED_HOUSING_TCP_INTERFACE
 extern LEP_RESULT LEP_GetRadTHousingTcp( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
                                          LEP_RAD_LINEAR_TEMP_CORRECTION_T_PTR radHousingTcp );
 extern LEP_RESULT LEP_SetRadTHousingTcp( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
                                          LEP_RAD_LINEAR_TEMP_CORRECTION_T radHousingTcp );
-   #else
+#else
 extern LEP_RESULT LEP_GetRadHousingTcp( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
                                         LEP_RAD_LINEAR_TEMP_CORRECTION_T_PTR radHousingTcp );
 extern LEP_RESULT LEP_SetRadHousingTcp( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
                                         LEP_RAD_LINEAR_TEMP_CORRECTION_T radHousingTcp );
-   #endif
+#endif
 
 
 extern LEP_RESULT LEP_GetRadShutterTcp( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
@@ -617,8 +603,10 @@ extern LEP_RESULT LEP_SetRadRadioCalValues( LEP_CAMERA_PORT_DESC_T_PTR portDescP
                                             LEP_RAD_RADIO_CAL_VALUES_T radRadioCalValues );
 
 /******************************************************************************/
-   #ifdef __cplusplus
+
+#ifdef __cplusplus
 }
-   #endif
+#endif
+
 #endif   /* _LEPTON_RAD_H_  */
 
