@@ -110,21 +110,18 @@ LEP_RESULT LEP_GetAgcEnableState( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
    LEP_RESULT  result = LEP_OK;
    LEP_UINT16 attributeWordLength = 2; /* attribute is an enum, so 32-bit value */
 
-   /* Validate Parameter(s)
-   */
-   if( agcEnableStatePtr == NULL )
-   {
-      return( LEP_BAD_ARG_POINTER_ERROR );
-   }
+   /* Validate Parameter(s) */
+   if (agcEnableStatePtr == NULL)
+      return LEP_BAD_ARG_POINTER_ERROR;
 
    /* Perform Command
-   ** Read the Camera's AGC Enable State
-   */
+    * Read the Camera's AGC Enable State
+    */
    result = LEP_GetAttribute( portDescPtr,
                               ( LEP_COMMAND_ID )LEP_CID_AGC_ENABLE_STATE,
                               ( LEP_ATTRIBUTE_T_PTR )agcEnableStatePtr,
                               attributeWordLength );
-   return( result );
+   return result;
 }
 
 /**
@@ -145,21 +142,18 @@ LEP_RESULT LEP_SetAgcEnableState( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
    LEP_RESULT  result = LEP_OK;
    LEP_UINT16 attributeWordLength = 2; /* 2 16-bit value */
 
-   /* Validate Parameter(s)
-   */
-   if( agcEnableState >= LEP_END_AGC_ENABLE )
-   {
-      return( LEP_RANGE_ERROR );
-   }
+   /* Validate Parameter(s) */
+   if (agcEnableState >= LEP_END_AGC_ENABLE)
+      return LEP_RANGE_ERROR;
 
    /* Perform Command
-   ** Writing the Camera's AGC Enable State
-   */
+    * Writing the Camera's AGC Enable State
+    */
    result = LEP_SetAttribute( portDescPtr,
                               ( LEP_COMMAND_ID )LEP_CID_AGC_ENABLE_STATE,
                               ( LEP_ATTRIBUTE_T_PTR ) & agcEnableState,
                               attributeWordLength );
-   return( result );
+   return result;
 }
 
 
@@ -171,21 +165,18 @@ LEP_RESULT LEP_GetAgcPolicy( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
    LEP_RESULT  result = LEP_OK;
    LEP_UINT16 attributeWordLength = 2; /* 2 16-bit value */
 
-   /* Validate Parameter(s)
-   */
-   if( agcPolicyPtr == NULL )
-   {
-      return( LEP_BAD_ARG_POINTER_ERROR );
-   }
+   /* Validate Parameter(s) */
+   if (agcPolicyPtr == NULL)
+      return LEP_BAD_ARG_POINTER_ERROR;
 
    /* Perform Command
-   ** Reading the Camera's AGC Policy
-   */
+    * Reading the Camera's AGC Policy
+    */
    result = LEP_GetAttribute(  portDescPtr,
                               ( LEP_COMMAND_ID )LEP_CID_AGC_POLICY,
                               ( LEP_ATTRIBUTE_T_PTR )agcPolicyPtr,
                               attributeWordLength );
-   return( result );
+   return result;
 }
 
 LEP_RESULT LEP_SetAgcPolicy( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
@@ -194,21 +185,18 @@ LEP_RESULT LEP_SetAgcPolicy( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
    LEP_RESULT  result = LEP_OK;
    LEP_UINT16 attributeWordLength = 2; /* 2 16-bit value */
 
-   /* Bounds Check
-   */
-   if( agcPolicy >= LEP_END_AGC_POLICY )
-   {
-      return( LEP_RANGE_ERROR );
-   }
+   /* Bounds Check */
+   if (agcPolicy >= LEP_END_AGC_POLICY)
+      return LEP_RANGE_ERROR;
 
    /* Perform Command
-   ** Writing the Camera's AGC Policy
-   */
+    * Writing the Camera's AGC Policy
+    */
    result = LEP_SetAttribute( portDescPtr,
                               ( LEP_COMMAND_ID )LEP_CID_AGC_POLICY,
                               ( LEP_ATTRIBUTE_T_PTR ) & agcPolicy,
                               attributeWordLength );
-   return( result );
+   return result;
 }
 
 
@@ -219,22 +207,19 @@ LEP_RESULT LEP_GetAgcROI( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
    LEP_RESULT  result = LEP_OK;
    LEP_UINT16 attributeWordLength = 4; /* four 16-bit values */
 
-   /* Validate Parameter(s)
-   */
-   if( agcROIPtr == NULL )
-   {
-      return( LEP_BAD_ARG_POINTER_ERROR );
-   }
+   /* Validate Parameter(s) */
+   if (agcROIPtr == NULL)
+      return LEP_BAD_ARG_POINTER_ERROR;
 
    /* Perform Command
-   ** Reading the Camera's AGC ROI
-   */
+    * Reading the Camera's AGC ROI
+    */
    result = LEP_GetAttribute( portDescPtr,
                               ( LEP_COMMAND_ID )LEP_CID_AGC_ROI,
                               ( LEP_ATTRIBUTE_T_PTR )agcROIPtr,
                               attributeWordLength );
    //return(sizeof(*agcROIPtr));
-   return( result );
+   return result;
 }
 
 
@@ -244,28 +229,27 @@ LEP_RESULT LEP_SetAgcROI( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
    LEP_RESULT  result = LEP_OK;
    LEP_UINT16 attributeWordLength = 4; /* four 16-bit values */
 
-   if( ( agcROI.startCol >= LEP_AGC_MIN_COL ) && 
-       ( agcROI.startCol <= LEP_AGC_MAX_COL ) &&
-       ( agcROI.endCol >= LEP_AGC_MIN_COL ) && 
-       ( agcROI.endCol <= LEP_AGC_MAX_COL ) &&
-       ( agcROI.startRow >= LEP_AGC_MIN_ROW ) && 
-       ( agcROI.startRow <= LEP_AGC_MAX_ROW ) &&
-       ( agcROI.endRow >= LEP_AGC_MIN_ROW ) && 
-       ( agcROI.endRow <= LEP_AGC_MAX_ROW ) 
-       )
-   {
+   // TODO: there has to be a better way
+   if ((agcROI.startCol >= LEP_AGC_MIN_COL) && 
+       (agcROI.startCol <= LEP_AGC_MAX_COL) &&
+       (agcROI.endCol   >= LEP_AGC_MIN_COL) && 
+       (agcROI.endCol   <= LEP_AGC_MAX_COL) &&
+       (agcROI.startRow >= LEP_AGC_MIN_ROW) && 
+       (agcROI.startRow <= LEP_AGC_MAX_ROW) &&
+       (agcROI.endRow   >= LEP_AGC_MIN_ROW) && 
+       (agcROI.endRow   <= LEP_AGC_MAX_ROW)) {
    /* Perform Command
-   ** Writing the Camera's AGC ROI
-   */
+    * Writing the Camera's AGC ROI
+    */
    result = LEP_SetAttribute( portDescPtr,
                               ( LEP_COMMAND_ID )LEP_CID_AGC_ROI,
                               ( LEP_ATTRIBUTE_T_PTR ) & agcROI,
                               attributeWordLength );
-   }
-   else
+   } else {
       result = LEP_RANGE_ERROR;
+   }
 
-   return( result );
+   return result;
 }
 
 LEP_RESULT LEP_GetAgcLinearHistogramClipPercent( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
@@ -274,21 +258,18 @@ LEP_RESULT LEP_GetAgcLinearHistogramClipPercent( LEP_CAMERA_PORT_DESC_T_PTR port
    LEP_RESULT  result = LEP_OK;
    LEP_UINT16 attributeWordLength = 1; /* single 16-bit value */
 
-   /* Validate Parameter(s)
-   */
-   if( agcLinearHistogramClipPercentPtr == NULL )
-   {
-      return( LEP_BAD_ARG_POINTER_ERROR );
-   }
+   /* Validate Parameter(s) */
+   if (agcLinearHistogramClipPercentPtr == NULL)
+      return LEP_BAD_ARG_POINTER_ERROR;
 
    /* Perform Command
-   ** Reading the Camera's AGC Linear Histogram Clip Percent
-   */
+    * Reading the Camera's AGC Linear Histogram Clip Percent
+    */
    result = LEP_GetAttribute( portDescPtr,
                               ( LEP_COMMAND_ID )LEP_CID_AGC_HISTOGRAM_CLIP_PERCENT,
                               ( LEP_ATTRIBUTE_T_PTR )agcLinearHistogramClipPercentPtr,
                               attributeWordLength );
-   return( result );
+   return result;
 }
 
 LEP_RESULT LEP_SetAgcLinearHistogramClipPercent( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
@@ -297,22 +278,19 @@ LEP_RESULT LEP_SetAgcLinearHistogramClipPercent( LEP_CAMERA_PORT_DESC_T_PTR port
    LEP_RESULT  result = LEP_OK;
    LEP_UINT16 attributeWordLength = 1; /* single 16-bit value */
 
-   /* Bounds check
-   */
-   if( agcLinearHistogramClipPercent >= LEP_AGC_MAX_HISTOGRAM_CLIP_PERCENT )
-   {
-      return( LEP_RANGE_ERROR );
-   }
+   /* Bounds check */
+   if (agcLinearHistogramClipPercent >= LEP_AGC_MAX_HISTOGRAM_CLIP_PERCENT)
+      return LEP_RANGE_ERROR;
 
    /* Perform Command
-   ** Writing the Camera's AGC Linear Histogram Clip Percent
-   */
+    * Writing the Camera's AGC Linear Histogram Clip Percent
+    */
    result = LEP_SetAttribute( portDescPtr,
                               ( LEP_COMMAND_ID )LEP_CID_AGC_HISTOGRAM_CLIP_PERCENT,
                               ( LEP_ATTRIBUTE_T_PTR ) & agcLinearHistogramClipPercent,
                               attributeWordLength
                               );
-   return( result );
+   return result;
 }
 
 
@@ -322,21 +300,18 @@ LEP_RESULT LEP_GetAgcLinearHistogramTailSize( LEP_CAMERA_PORT_DESC_T_PTR portDes
    LEP_RESULT  result = LEP_OK;
    LEP_UINT16 attributeWordLength = 1; /* single 16-bit value */
 
-   /* Validate Parameter(s)
-   */
-   if( agcLinearHistogramTailSizePtr == NULL )
-   {
-      return( LEP_BAD_ARG_POINTER_ERROR );
-   }
+   /* Validate Parameter(s) */
+   if (agcLinearHistogramTailSizePtr == NULL)
+      return LEP_BAD_ARG_POINTER_ERROR;
 
    /* Perform Command
-   ** Reading the Camera's AGC Linear Histogram Tail Size
-   */
+    * Reading the Camera's AGC Linear Histogram Tail Size
+    */
    result = LEP_GetAttribute( portDescPtr,
                               ( LEP_COMMAND_ID )LEP_CID_AGC_HISTOGRAM_TAIL_SIZE,
                               ( LEP_ATTRIBUTE_T_PTR )agcLinearHistogramTailSizePtr,
                               attributeWordLength );
-   return( result );
+   return result;
 }
 
 
@@ -346,22 +321,19 @@ LEP_RESULT LEP_SetAgcLinearHistogramTailSize( LEP_CAMERA_PORT_DESC_T_PTR portDes
    LEP_RESULT  result = LEP_OK;
    LEP_UINT16 attributeWordLength = 1; /* single 16-bit value */
 
-   /* Bounds Check
-   */
-   if( agcLinearHistogramTailSize >= LEP_AGC_MAX_HISTOGRAM_TAIL_SIZE )
-   {
-      return( LEP_RANGE_ERROR );
-   }
+   /* Bounds Check */
+   if (agcLinearHistogramTailSize >= LEP_AGC_MAX_HISTOGRAM_TAIL_SIZE)
+      return LEP_RANGE_ERROR;
 
    /* Perform Command
-   ** Writing the Camera's AGC Linear Histogram Clip Percent
-   */
+    * Writing the Camera's AGC Linear Histogram Clip Percent
+    */
    result = LEP_SetAttribute( portDescPtr,
                               ( LEP_COMMAND_ID )LEP_CID_AGC_HISTOGRAM_TAIL_SIZE,
                               ( LEP_ATTRIBUTE_T_PTR ) & agcLinearHistogramTailSize,
                               attributeWordLength
                               );
-   return( result );
+   return result;
 }
 
 
@@ -371,28 +343,23 @@ LEP_RESULT LEP_GetAgcHistogramStatistics( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr
    LEP_RESULT  result = LEP_OK;
    LEP_UINT16 attributeWordLength = 4; /* four 16-bit values */
 
-   /* Validate Parameter(s)
-   */
-   if( agcHistogramStatisticsPtr == NULL )
-   {
-      return( LEP_BAD_ARG_POINTER_ERROR );
-   }
+   /* Validate Parameter(s) */
+   if (agcHistogramStatisticsPtr == NULL)
+      return LEP_BAD_ARG_POINTER_ERROR;
 
    /* Perform Command
-   ** Reading the Camera's AGC Linear Histogram Statistics
-   */
+    * Reading the Camera's AGC Linear Histogram Statistics
+    */
    result = LEP_GetAttribute( portDescPtr,
                               ( LEP_COMMAND_ID )LEP_CID_AGC_STATISTICS,
                               ( LEP_ATTRIBUTE_T_PTR )agcHistogramStatisticsPtr,
                               attributeWordLength );
-   return( result );
+   return result;
 }
 
 
 
-/* Linear Policy Controls
-*/
-
+/* Linear Policy Controls */
 LEP_RESULT LEP_GetAgcLinearMaxGain( LEP_CAMERA_PORT_DESC_T_PTR portDescPtr,
                                     LEP_UINT16 *agcLinearMaxGainPtr )
 {
