@@ -8,7 +8,7 @@ CFLAGS += -O3
 # debug
 CFLAGS += -g
 
-OUTDIR = Build
+OUTDIR = Debug
 OUTFILE = $(OUTDIR)/libLEPTON_SDK.a
 
 # SOURCES = crc16fast.c crc16.h LEPTON_AGC.c LEPTON_AGC.h \
