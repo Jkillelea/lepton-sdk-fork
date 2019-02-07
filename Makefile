@@ -2,11 +2,13 @@
 # Jacob Killelea
 
 CC = gcc -c
-CFLAGS = -Wall
+CFLAGS = -Wall -march=native
+
 # Optimization
 CFLAGS += -O3
+
 # debug
-CFLAGS += -g
+# CFLAGS += -g
 
 OUTDIR = Debug
 OUTFILE = $(OUTDIR)/libLEPTON_SDK.a
