@@ -99,7 +99,7 @@ typedef enum Result
 
    /* OTP access errors */
    LEP_OTP_WRITE_ERROR               = -15,   /*!< Camera OTP write error */
-   LEP_OTP_READ_ERROR				    = -16,   /* double bit error detected (uncorrectible) */
+   LEP_OTP_READ_ERROR				 = -16,   /* double bit error detected (uncorrectible) */
 
    LEP_OTP_NOT_PROGRAMMED_ERROR      = -18,   /* Flag read as non-zero */
 
