@@ -141,6 +141,7 @@ typedef enum Result
 /** EXPORTED PUBLIC FUNCTIONS                                                **/
 /******************************************************************************/
 
+const char *error_as_string(LEP_RESULT errortype);
 
    #ifdef __cplusplus
 }
